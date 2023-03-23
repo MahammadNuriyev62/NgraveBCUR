@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -18,8 +18,8 @@ type Props = RootStackScreenProps<"ScanQR">;
 const ScanQRScreen: FC<Props> = () => {
   const [data, setData] = useState<string>("");
   const [visible, setVisible] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [showProgress, setShowProgress] = useState(false);
+  const refs = useRef<{ timeout: NodeJS.Timeout }>({ timeout: null }).current;
 
   const { onBarCodeScan, resetDecoder } = useScanAnimatedQr({
     onSuccess: (data) => {
@@ -28,17 +28,12 @@ const ScanQRScreen: FC<Props> = () => {
     onFail: (error) => {
       setData("ERROR: " + error);
     },
-    onProgress: (progress) => {
-      setProgress(progress);
+    onScan: () => {
+      clearTimeout(refs.timeout);
+      setShowProgress(true);
+      refs.timeout = setTimeout(() => setShowProgress(false), 200);
     },
   });
-
-  useEffect(() => {
-    if (!progress) return;
-    setShowProgress(true);
-    const timeout = setTimeout(() => setShowProgress(false), 1000);
-    return () => clearTimeout(timeout);
-  }, [progress]);
 
   const reset = () => {
     setData("");
