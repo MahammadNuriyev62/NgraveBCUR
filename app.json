@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "QRNgraveBCUR",
-    "slug": "QRNgraveBCUR",
+    "name": "NgraveBCUR",
+    "slug": "ngravebcur",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,9 +19,7 @@
         }
       ]
     ],
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
