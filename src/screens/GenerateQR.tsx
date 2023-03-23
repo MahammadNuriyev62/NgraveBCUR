@@ -15,11 +15,9 @@ import KeyboardAvoidingView from "@components/KeyboardAvoidingView";
 
 type Props = RootStackScreenProps<"GenerateQR">;
 
-const DEFAULT_PAYLOAD = "NGRAVE";
-
 const GenerateQRScreen: FC<Props> = () => {
   const [payloadModalVisible, setPayloadModalVisible] = useState(false);
-  const [payload, setPayload] = useState<string>(DEFAULT_PAYLOAD);
+  const [payload, setPayload] = useState<string | null>(null);
   const refs = useRef({ pendingPayload: "" }).current;
   return (
     <>
@@ -32,6 +30,7 @@ const GenerateQRScreen: FC<Props> = () => {
             title="Enter Payload"
             onPress={() => setPayloadModalVisible(true)}
           />
+          <Button title="Reset" onPress={() => setPayload(null)} />
         </ScrollView>
       </View>
       <Modal
@@ -42,15 +41,13 @@ const GenerateQRScreen: FC<Props> = () => {
       >
         <KeyboardAvoidingView>
           <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ padding: 20, flex: 1 }}>
-              <TextInput
-                multiline
-                style={styles.input}
-                onChangeText={(text) => {
-                  refs.pendingPayload = text;
-                }}
-              />
-            </View>
+            <TextInput
+              multiline
+              style={styles.input}
+              onChangeText={(text) => {
+                refs.pendingPayload = text;
+              }}
+            />
             <Button
               title="Enter"
               onPress={() => {
@@ -77,6 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f0f0f0",
     borderRadius: 10,
     padding: 10,
+    margin: 20,
   },
   qrContainer: {
     alignItems: "center",

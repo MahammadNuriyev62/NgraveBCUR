@@ -34,6 +34,7 @@ const ScanQRScreen: FC<Props> = () => {
   });
 
   useEffect(() => {
+    if (!progress) return;
     setShowProgress(true);
     const timeout = setTimeout(() => setShowProgress(false), 1000);
     return () => clearTimeout(timeout);
@@ -77,7 +78,7 @@ const ScanQRScreen: FC<Props> = () => {
         presentationStyle="formSheet"
         onRequestClose={reset}
       >
-        <View style={{ flex: 1, backgroundColor: "black" }}>
+        <View style={{ flex: 1, backgroundColor: "white" }}>
           <KeyboardAvoidingView>
             <TextInput
               multiline
@@ -94,11 +95,11 @@ const ScanQRScreen: FC<Props> = () => {
 
 const styles = StyleSheet.create({
   input: {
-    color: "white",
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: "black",
+    color: "black",
+    margin: 20,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 10,
+    padding: 10,
   },
   scanner: {
     height: "100%",
