@@ -11,6 +11,7 @@
   "dependencies": {
     "@ngraveio/bc-ur": "1.1.3",
     "@types/react": "~18.0.27",
+    "buffer": "^6.0.3",
     "expo": "~48.0.9",
     "expo-barcode-scanner": "~12.3.2",
     "expo-status-bar": "~1.4.4",

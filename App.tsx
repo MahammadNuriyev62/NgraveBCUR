@@ -1,4 +1,4 @@
-if (typeof Buffer === "undefined") global.Buffer = require("buffer").Buffer;
+import "./scripts/import-buffer";
 
 import React from 'react';
 import HomeScreen from './src/screens/Home';
@@ -6,7 +6,7 @@ import HomeScreen from './src/screens/Home';
 export default function App() {
   return (
     <>
-    <HomeScreen />
+      <HomeScreen />
     </>
   );
 }
