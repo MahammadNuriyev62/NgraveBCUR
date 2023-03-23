@@ -8,7 +8,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   return (
     <>
       <Button title="Scan QR" onPress={() => navigation.navigate("ScanQR")} />
-      <Button title="Generate QR" onPress={() => {}} />
+      <Button
+        title="Generate QR"
+        onPress={() => navigation.navigate("GenerateQR")}
+      />
     </>
   );
 };

@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
   Modal,
   TextInput,
   BackHandler,
-  KeyboardAvoidingView,
   Platform,
   Text,
-  ScrollView,
 } from "react-native";
-import QRCodeScanner from "../components/QRCodeScanner";
+import QRCodeScanner from "@components/QRCodeScanner";
+import KeyboardAvoidingView from "@components/KeyboardAvoidingView";
 import { useScanAnimatedQr } from "../hooks/bcur.hook";
+import { RootStackScreenProps } from "../navigators/types";
 
-export default function ScanQRScreen() {
-  const [data, setData] = useState("");
+type Props = RootStackScreenProps<"ScanQR">;
+
+const ScanQRScreen: FC<Props> = () => {
+  const [data, setData] = useState<string>("");
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showProgress, setShowProgress] = useState(false);
@@ -38,7 +40,7 @@ export default function ScanQRScreen() {
   }, [progress]);
 
   const reset = () => {
-    setData(null);
+    setData("");
     return true;
   };
 
@@ -76,12 +78,7 @@ export default function ScanQRScreen() {
         onRequestClose={reset}
       >
         <View style={{ flex: 1, backgroundColor: "black" }}>
-          <KeyboardAvoidingView
-            keyboardVerticalOffset={50}
-            behavior={"padding"}
-            style={{ flex: 1 }}
-            enabled={Platform.OS === "ios"}
-          >
+          <KeyboardAvoidingView>
             <TextInput
               multiline
               value={data}
@@ -93,7 +90,7 @@ export default function ScanQRScreen() {
       </Modal>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   input: {
@@ -119,3 +116,5 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+
+export default ScanQRScreen;
