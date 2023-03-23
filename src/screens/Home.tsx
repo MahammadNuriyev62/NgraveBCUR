@@ -54,7 +54,7 @@ export default function HomeScreen() {
       resetDecoder();
       const timeout = setTimeout(() => {
         setVisible(false);
-      }, 1000);
+      }, 600);
       return () => clearTimeout(timeout);
     } else setVisible(true);
   }, [data]);
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "blue",
+    backgroundColor: "white",
   },
   progress: {
     position: "absolute",
