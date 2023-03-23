@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Text,
+  ScrollView,
 } from "react-native";
 import QRCodeScanner from "../components/QRCodeScanner";
 import { useScanAnimatedQr } from "../hooks/bcur.hook";
@@ -74,20 +75,34 @@ export default function HomeScreen() {
         presentationStyle="formSheet"
         onRequestClose={reset}
       >
-        <KeyboardAvoidingView
-          keyboardVerticalOffset={50}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ flex: 1 }}
-          enabled
-        >
-          <TextInput multiline value={data} onChangeText={setData} />
-        </KeyboardAvoidingView>
+        <View style={{ flex: 1, backgroundColor: "black" }}>
+          <KeyboardAvoidingView
+            keyboardVerticalOffset={50}
+            behavior={"padding"}
+            style={{ flex: 1 }}
+            enabled={Platform.OS === "ios"}
+          >
+            <TextInput
+              multiline
+              value={data}
+              onChangeText={setData}
+              style={styles.input}
+            />
+          </KeyboardAvoidingView>
+        </View>
       </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  input: {
+    color: "white",
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "black",
+  },
   scanner: {
     height: "100%",
     width: "100%",
